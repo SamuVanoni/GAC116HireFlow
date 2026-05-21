@@ -1,0 +1,216 @@
+[
+{
+    "model": "accounts.candidateprofile",
+    "pk": 1,
+    "fields": {
+        "user": 36,
+        "birth_date": "2026-05-20",
+        "university": "UFLA",
+        "course": "SI",
+        "desired_area": "Cybersecurity"
+    }
+},
+{
+    "model": "accounts.candidateprofile",
+    "pk": 2,
+    "fields": {
+        "user": 37,
+        "birth_date": "2026-05-21",
+        "university": "Universidade federal de lavras",
+        "course": "Sistemas de informacao",
+        "desired_area": "Dormidor profissional"
+    }
+},
+{
+    "model": "jobs.company",
+    "pk": 1,
+    "fields": {
+        "recruiter": 34,
+        "name": "Compass UOL",
+        "logo": "company_logos/LogoCompasso-positivo.png",
+        "primary_color": "Black",
+        "description": "Aqui voce nao precisa fazer nada, so fingir que sabe fazer, procuramos um cybersegurança.\r\n\r\ncybersecurity, mestre em segurança."
+    }
+},
+{
+    "model": "jobs.company",
+    "pk": 2,
+    "fields": {
+        "recruiter": 35,
+        "name": "Levty",
+        "logo": "company_logos/levty_W5LTVcV.png",
+        "primary_color": "Blue",
+        "description": "Aqui voce precisara ser profissional em bater o ponto e voltar a dormir, precisamos de pessoas disciplinadas em bater ponto!\r\n\r\nSonin bom, profissional em dormir."
+    }
+},
+{
+    "model": "jobs.job",
+    "pk": 1,
+    "fields": {
+        "company": 1,
+        "title": "Renda Passiva Cyber",
+        "description": "Precisamos de alguem que saiba cybersegurança e seja profissional em teatro, para fingir que trabalha!",
+        "requirements": "Cybersegurança, Mestre em segurança, Profissional em fingir.",
+        "created_at": "2026-05-20T13:10:31.727Z"
+    }
+},
+{
+    "model": "jobs.job",
+    "pk": 2,
+    "fields": {
+        "company": 2,
+        "title": "Renda Passiva Sonin",
+        "description": "Aqui precisaremos que voce saiba bater ponto e que tenha um sono suficientemente bom para bater o ponto e voltar a dormir sem problemas, voce tambem fara alguns trabalhos de front de vez em quando.",
+        "requirements": "Sonin bom, Dormir, Bater ponto e dormir, o básico de Front.",
+        "created_at": "2026-05-20T13:11:48.180Z"
+    }
+},
+{
+    "model": "applications.resume",
+    "pk": 1,
+    "fields": {
+        "candidate": 37,
+        "pdf_file": "resumes/Curriculo.pdf",
+        "extracted_text": "Dormidor profissional, gostaria de bater ponto e voltar a dormir, sonin bom"
+    }
+},
+{
+    "model": "applications.resume",
+    "pk": 2,
+    "fields": {
+        "candidate": 36,
+        "pdf_file": "resumes/Curriculo_HGyjgyQ.pdf",
+        "extracted_text": "Cybersecurity senior, defendo sites, mestre da segurança"
+    }
+},
+{
+    "model": "applications.application",
+    "pk": 1,
+    "fields": {
+        "candidate": 36,
+        "job": 1,
+        "score": 85.0,
+        "created_at": "2026-05-20T13:12:03.915Z"
+    }
+},
+{
+    "model": "applications.application",
+    "pk": 2,
+    "fields": {
+        "candidate": 36,
+        "job": 2,
+        "score": 20.0,
+        "created_at": "2026-05-20T13:12:10.902Z"
+    }
+},
+{
+    "model": "applications.application",
+    "pk": 3,
+    "fields": {
+        "candidate": 37,
+        "job": 2,
+        "score": 95.0,
+        "created_at": "2026-05-20T13:12:21.334Z"
+    }
+},
+{
+    "model": "applications.application",
+    "pk": 4,
+    "fields": {
+        "candidate": 37,
+        "job": 1,
+        "score": 42.0,
+        "created_at": "2026-05-20T13:12:33.576Z"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$jh7Qlc18MvFvPH1qZskdVl$2j0bv5ifT3fj+SnCavhr0gQtbrcAGbOryqBcVHWjKYI=",
+        "last_login": "2026-05-20T12:50:15.972Z",
+        "is_superuser": true,
+        "username": "samuvanoni",
+        "first_name": "",
+        "last_name": "",
+        "email": "samu.prog00@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-05-19T20:54:11.193Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 34,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$ivqZJiYzFVZqKMcxn7ZMG1$M31Rg/MChjQMWtY8EFRuGJWqQOzj0w73Bfdi+34H1AU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "samu",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-20T13:01:54.326Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 35,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$VJL8wyJ9DocuKvOYVEO60h$y4uyK40IcBkCNMjq+Qblla6k6RcN/bMim+qryqXQ9II=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "lara",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-20T13:02:20.691Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 36,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$vW4tDq09Rcu7yaHo742qZo$AO/LP4DNEuiwgMb8edIEHoKD2BJ5jObEnAYQC3+TVJc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "daniel",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-20T13:02:37.283Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 37,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$qQZ379zzyr383Vymbkbcl7$qjHAOkmqDO+y6XqLHkFIIcXM7Biphh5TdyClmFht7AU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "joao",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-20T13:02:47.999Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
