@@ -279,7 +279,7 @@ docker compose up --build
 Abra outro terminal:
 
 ```bash
-docker exec -it hireflow_backend bash
+docker exec -it hireflow-backend bash
 ```
 
 Depois:
