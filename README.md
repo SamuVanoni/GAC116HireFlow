@@ -4,74 +4,210 @@
 
 O **HireFlow** é uma plataforma web de recrutamento e gerenciamento de processos seletivos desenvolvida para a disciplina de **Programação Web (GAC116)** da Universidade Federal de Lavras (UFLA).
 
-A proposta do sistema é modernizar e simplificar o fluxo de contratação de empresas através de uma aplicação SaaS (*Software as a Service*), permitindo que recrutadores criem vagas, gerenciem candidatos e utilizem um sistema inteligente de ranqueamento baseado na compatibilidade entre currículo e requisitos da vaga.
+O objetivo do sistema é simplificar o processo de recrutamento, permitindo que empresas publiquem vagas e candidatos realizem candidaturas através de uma plataforma centralizada.
 
-O projeto foi idealizado não apenas como um trabalho acadêmico, mas também como um possível produto real com potencial de evolução comercial.
+Além do contexto acadêmico, o projeto foi idealizado com foco em uma possível evolução para um produto SaaS voltado para pequenas e médias empresas.
 
 ---
 
-# ✨ Funcionalidades
+# ✨ Funcionalidades Implementadas
 
 ## 👨‍💼 Recrutadores
 
-* Cadastro e autenticação de empresas/recrutadores.
-* Criação e gerenciamento de vagas.
-* Dashboard administrativo protegido.
-* Visualização de candidatos aplicados.
-* Ranking automático de candidatos baseado em compatibilidade.
-* Gerenciamento administrativo utilizando Django Admin customizado.
+* Cadastro e gerenciamento de empresas.
+* Cadastro de vagas.
+* Gerenciamento de candidatos.
+* Visualização de candidaturas.
+* Dashboard administrativo via Django Admin.
+* Interface administrativa customizada utilizando Jazzmin.
 
 ---
 
 ## 👨‍🎓 Candidatos
 
-* Cadastro e autenticação de usuários.
-* Upload de currículo em PDF.
-* Aplicação para vagas.
-* Gerenciamento de candidaturas realizadas.
+* Cadastro de perfil.
+* Cadastro de currículo.
+* Aplicação em vagas.
+* Visualização das candidaturas realizadas.
 
 ---
 
-## 🧠 Inteligência de Matching
+## 🔗 API REST
 
-* Extração automática de texto de currículos PDF.
-* Sistema de compatibilidade utilizando:
+A aplicação possui APIs desenvolvidas com Django REST Framework para comunicação entre frontend e backend.
 
-  * TF-IDF
-  * Similaridade de Cosseno
-* Geração de score de compatibilidade entre candidato e vaga.
+### Endpoints implementados
 
-> ⚠️ O sistema de matching inteligente encontra-se em fase de planejamento e será implementado nas próximas etapas do projeto.
+* Empresas
+* Vagas
+* Currículos
+* Candidaturas
+* Perfis de candidatos
+
+---
+
+## 🎨 Frontend
+
+Interface desenvolvida utilizando:
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+
+Funcionalidades disponíveis:
+
+* Visualização de vagas
+* Cadastro de candidatos
+* Formulários de candidatura
+* Consumo das APIs do backend
+
+---
+
+# 🏗️ Arquitetura do Sistema
+
+```text
+Frontend (Next.js)
+        ↓
+API REST (Django REST Framework)
+        ↓
+PostgreSQL
+```
+
+Toda a aplicação é executada utilizando containers Docker.
+
+---
+
+# 🗄️ Modelagem do Banco de Dados
+
+O sistema utiliza PostgreSQL como banco de dados relacional.
+
+## Principais Entidades
+
+### User
+
+Representa usuários autenticados do sistema.
+
+### CandidateProfile
+
+Informações complementares dos candidatos.
+
+### Company
+
+Empresas cadastradas na plataforma.
+
+### Job
+
+Vagas publicadas pelas empresas.
+
+### Resume
+
+Currículos enviados pelos candidatos.
+
+### Application
+
+Relacionamento entre candidato e vaga.
+
+---
+
+# 🗺️ Diagrama ER
+
+Adicionar a imagem do diagrama ER do projeto:
+
+```markdown
+![Diagrama ER](./docs/diagrama-er.png)
+```
+
+---
+
+# ⚙️ Ambiente Administrativo
+
+O sistema utiliza Django Admin customizado com o tema **Jazzmin**.
+
+Funcionalidades implementadas:
+
+## 🔍 Search Fields
+
+Permite realizar buscas diretamente no painel administrativo.
+
+```python
+search_fields = ('title', 'requirements')
+```
+
+---
+
+## 📋 List Display
+
+Define quais colunas são exibidas na listagem.
+
+```python
+list_display = ('id', 'title', 'company', 'created_at')
+```
+
+---
+
+## 🎛️ List Filter
+
+Permite filtrar registros através da interface administrativa.
+
+```python
+list_filter = ('company', 'created_at')
+```
+
+---
+
+## 🔥 Inline Editing
+
+Permite editar entidades relacionadas diretamente dentro da entidade principal.
+
+Exemplo:
+
+* Company → Jobs
+
+---
+
+## 🧠 Clean Validation
+
+Validações customizadas implementadas nos modelos.
+
+Exemplo:
+
+```python
+def clean(self):
+    if self.score < 0 or self.score > 100:
+        raise ValidationError(
+            "Score must be between 0 and 100."
+        )
+```
 
 ---
 
 # 🛠️ Tecnologias Utilizadas
 
-## 🎨 Frontend
+## Frontend
 
 * Next.js
 * React
-* Tailwind CSS
 * TypeScript
+* Tailwind CSS
 
 ---
 
-## ⚙️ Backend
+## Backend
 
 * Django
 * Django REST Framework
-* JWT Authentication
 * Django Jazzmin
 
 ---
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
 * PostgreSQL
 
 ---
 
-## 🐳 DevOps
+## DevOps
 
 * Docker
 * Docker Compose
@@ -81,7 +217,7 @@ O projeto foi idealizado não apenas como um trabalho acadêmico, mas também co
 
 # 📂 Estrutura do Projeto
 
-```plaintext
+```text
 hireflow/
 │
 ├── backend/
@@ -90,14 +226,14 @@ hireflow/
 │   ├── applications/
 │   ├── config/
 │   ├── Dockerfile
-│   ├── data.json
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── data.json
 │
 ├── frontend/
-│   ├── src/
 │   ├── app/
 │   ├── components/
 │   ├── services/
+│   ├── public/
 │   └── Dockerfile
 │
 ├── docs/
@@ -110,153 +246,9 @@ hireflow/
 
 ---
 
-# 🧱 Modelagem do Sistema
+# 🐳 Como Executar o Projeto
 
-O sistema foi modelado utilizando banco de dados relacional com entidades principais responsáveis pelo gerenciamento de empresas, vagas, candidatos e aplicações.
-
-## Principais Entidades
-
-* User
-* CandidateProfile
-* Company
-* Job
-* Resume
-* Application
-
----
-
-# 🗺️ Diagrama ER
-
-![Diagrama ER](./docs/diagrama-er.png)
-
----
-
-# ⚙️ Ambiente Administrativo
-
-O projeto utiliza o Django Admin customizado com o tema **Jazzmin**, proporcionando uma interface moderna e mais amigável para gerenciamento do sistema.
-
-## Funcionalidades implementadas no Admin
-
-* `search_fields`
-* `list_display`
-* `list_filter`
-* `inline`
-* `clean()` para validações customizadas
-
----
-
-## 🔍 search_fields
-
-Permite realizar buscas diretamente no painel administrativo.
-
-Exemplo:
-
-```python
-search_fields = ('title', 'requirements')
-```
-
----
-
-## 📋 list_display
-
-Define quais colunas serão exibidas na listagem administrativa.
-
-Exemplo:
-
-```python
-list_display = ('id', 'title', 'company', 'created_at')
-```
-
----
-
-## 🎛️ list_filter
-
-Adiciona filtros laterais no Django Admin.
-
-Exemplo:
-
-```python
-list_filter = ('company', 'created_at')
-```
-
----
-
-## 🔥 inline
-
-Permite editar entidades relacionadas diretamente dentro de outra entidade.
-
-Exemplo:
-
-* Company → Jobs
-
----
-
-## 🧠 clean()
-
-Implementa validações customizadas nos modelos.
-
-Exemplo:
-
-```python
-from django.core.exceptions import ValidationError
-
-
-def clean(self):
-    if self.score < 0 or self.score > 100:
-        raise ValidationError(
-            'Score must be between 0 and 100.'
-        )
-```
-
----
-
-# 🔄 Abordagem de Desenvolvimento
-
-O projeto está sendo desenvolvido de forma incremental utilizando conceitos de desenvolvimento ágil e arquitetura escalável.
-
-## Etapas planejadas
-
-### ✅ Checkpoint 1
-
-* Estrutura inicial do projeto.
-* Modelagem do banco de dados.
-* Ambiente administrativo Django.
-* Customização do Django Admin.
-* Configuração do PostgreSQL.
-* Configuração do Docker.
-* Persistência de dados com PostgreSQL.
-* Estrutura containerizada.
-
----
-
-### 🚧 Checkpoint 2
-
-* API REST completa.
-* Sistema de autenticação JWT.
-* Frontend em Next.js.
-* CRUD de vagas.
-* Aplicação de candidatos.
-* Sistema de ranking inteligente.
-
----
-
-### 🔮 Futuras Melhorias
-
-* Sistema multi-tenant.
-* IA com embeddings semânticos.
-* Dashboard analítico.
-* Sistema de notificações.
-* Deploy em cloud AWS.
-* Pipeline CI/CD.
-* Deploy automatizado.
-
----
-
-# 💻 Como Executar o Projeto
-
-## ✅ Pré-requisitos
-
-Instalar:
+## Pré-requisitos
 
 * Docker Desktop
 * WSL2
@@ -264,7 +256,7 @@ Instalar:
 
 ---
 
-## 🚀 Executando com Docker
+## Subir os Containers
 
 Na raiz do projeto:
 
@@ -274,12 +266,12 @@ docker compose up --build
 
 ---
 
-## 🗄️ Rodar migrations
+## Executar Migrations
 
 Abra outro terminal:
 
 ```bash
-docker exec -it hireflow-backend bash
+docker exec -it hireflow_backend bash
 ```
 
 Depois:
@@ -290,19 +282,7 @@ python manage.py migrate
 
 ---
 
-## 👤 Criar superusuário
-
-Dentro do container:
-
-```bash
-python manage.py createsuperuser
-```
-
----
-
-## 📦 Restaurar dados de exemplo
-
-Dentro do container:
+## Restaurar Dados de Exemplo
 
 ```bash
 python manage.py loaddata data.json
@@ -310,62 +290,85 @@ python manage.py loaddata data.json
 
 ---
 
-# 🌐 Acessos do Sistema
+## Criar Superusuário
 
-## 🎨 Frontend
+```bash
+python manage.py createsuperuser
+```
 
-```plaintext
+---
+
+# 🌐 Acessos
+
+## Frontend
+
+```text
 http://localhost:3000
 ```
 
 ---
 
-## ⚙️ Backend
+## Backend
 
-```plaintext
+```text
 http://localhost:8000
 ```
 
 ---
 
-## 🔐 Django Admin
+## Django Admin
 
-```plaintext
+```text
 http://localhost:8000/admin
 ```
 
 ---
 
-# 🧪 Dados de Demonstração
+# 📸 Telas do Sistema
 
-O projeto possui dados de exemplo para facilitar testes e apresentações.
+Adicionar screenshots do sistema:
 
-## Empresas
+```markdown
+![Home](./docs/home.png)
 
-* Compass UOL
-* Levty
+![Jobs](./docs/jobs.png)
 
-## Recrutadores
-
-* samu
-* lara
-
-## Candidatos
-
-* joao
-* daniel
+![Admin](./docs/admin.png)
+```
 
 ---
 
-# 👤 Autores
+# 🚧 Próximos Passos
 
-| [<img src="https://avatars.githubusercontent.com/u/185520073?v=4" width="100px"><br><sub>@danieLx77</sub>](https://github.com/DPontello) | [<img src="https://avatars.githubusercontent.com/u/78040348?v=4" width="100px"><br><sub>@jpedroreiss</sub>](https://github.com/luapxb) | [<img src="https://avatars.githubusercontent.com/u/123120658?v=4" width="100px"><br><sub>@SamuVanoni</sub>](https://github.com/SamuVanoni) |
-| :---: | :---: | :---: |
+As próximas evoluções planejadas para o projeto incluem:
+
+* Melhorar o algoritmo de matching entre currículo e vaga.
+* Implementar análise semântica de currículos.
+* Aprimorar o score de compatibilidade.
+* Adicionar autenticação JWT completa.
+* Implementar dashboards para recrutadores.
+* Melhorar a experiência do usuário no frontend.
+* Evoluir o sistema para arquitetura SaaS multiempresa.
+
+---
+
+# 👥 Equipe
+
+* Samuel Vanoni
+* João
+* Daniel
+* Lara
+
+Universidade Federal de Lavras (UFLA)
+
+Disciplina: Programação Web (GAC116)
+
+Professor: Raphael
 
 ---
 
 # 📄 Licença
 
-Este projeto está sob a licença **MIT**.
+Projeto desenvolvido para fins acadêmicos na disciplina de Programação Web da UFLA.
 
-O sistema foi desenvolvido para fins acadêmicos, pesquisa e aprimoramento prático em desenvolvimento web full stack utilizando Django, Next.js, PostgreSQL e arquitetura SaaS moderna.
+O código pode ser utilizado para estudos, pesquisas e evolução futura da plataforma.
